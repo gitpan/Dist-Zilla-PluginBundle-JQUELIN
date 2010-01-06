@@ -1,0 +1,13 @@
+Build.PL
+Changes
+LICENSE
+MANIFEST
+META.yml
+README
+dist.ini
+lib/Dist/Zilla/PluginBundle/JQUELIN.pm
+t/00-compile.t
+t/author-critic.t
+t/release-meta-yaml.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t
