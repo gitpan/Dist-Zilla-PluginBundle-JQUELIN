@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
-our $VERSION = '1.100080';
+our $VERSION = '1.100081';
 # ABSTRACT: build & release a distribution like jquelin
 
 use Dist::Zilla::PluginBundle::Git;
@@ -31,6 +31,11 @@ sub bundle_config {
           q<{{ $major }}.{{ cldr('yyDDD') }}>
         . sprintf('%01u', ($ENV{N} || 0))
         . ($ENV{DEV} ? (sprintf '_%03u', $ENV{DEV}) : '');
+
+    # params for autoprereq
+    my $prereq_params = defined $arg->{skip_prereq}
+        ? { skip => $arg->{skip_prereq} }
+        : {};
 
     # params for pod weaver
     $arg->{weaver} ||= 'pod';
@@ -57,7 +62,7 @@ sub bundle_config {
         [ ManifestSkip => {} ],
 
         # -- get prereqs
-        [ AutoPrereq => {} ],
+        [ AutoPrereq => $prereq_params ],
 
         # -- munge files
         [ ExtraTests  => {} ],
@@ -116,15 +121,16 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.100080
+version 1.100081
 
 =head1 SYNOPSIS
 
 In your F<dist.ini>:
 
     [@JQUELIN]
-    major_version = 1        ; this is the default
-    weaver        = pod      ; default, can also be 'task'
+    major_version = 1          ; this is the default
+    weaver        = pod        ; default, can also be 'task'
+    skip_prereq   = ::Test$    ; no default
 
 =head1 DESCRIPTION
 
@@ -181,6 +187,9 @@ L<AutoVersion|Dist::Zilla::Plugin::AutoVersion> plugin. Default to 1.
 =item * C<weaver> - can be either C<pod> (default) or C<task>, to load
 respectively either L<PodWeaver|Dist::Zilla::Plugin::PodWeaver> or
 L<TaskWeaver|Dist::Zilla::Plugin::TaskWeaver>.
+
+=item * C<skip_prereq> - passed as C<skip> option to the
+L<AutoPrereq|Dist::Zilla::Plugin::AutoPrereq> plugin if set. No default.
 
 =back
 

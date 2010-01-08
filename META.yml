@@ -15,7 +15,7 @@ name: Dist-Zilla-PluginBundle-JQUELIN
 provides:
   Dist::Zilla::PluginBundle::JQUELIN:
     file: lib/Dist/Zilla/PluginBundle/JQUELIN.pm
-    version: 1.100080
+    version: 1.100081
 requires:
   Dist::Zilla::PluginBundle::Git: 0
   Dist::Zilla::Role::PluginBundle: 0
@@ -30,4 +30,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-PluginBundle-JQUELIN
   repository: http://github.com/jquelin/dist-zilla-pluginbundle-jquelin
-version: 1.100080
+version: 1.100081
