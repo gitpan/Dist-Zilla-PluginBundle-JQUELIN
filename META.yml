@@ -3,10 +3,10 @@ abstract: 'build & release a distribution like jquelin'
 author:
   - 'Jerome Quelin'
 build_requires:
-  Module::Build: 0.35
+  Module::Build: 0.3601
 configure_requires:
-  Module::Build: 0.35
-generated_by: 'Dist::Zilla version 1.093400'
+  Module::Build: 0.3601
+generated_by: 'Dist::Zilla version 1.100130'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,13 +15,37 @@ name: Dist-Zilla-PluginBundle-JQUELIN
 provides:
   Dist::Zilla::PluginBundle::JQUELIN:
     file: lib/Dist/Zilla/PluginBundle/JQUELIN.pm
-    version: 1.100081
+    version: 1.100130
 requires:
+  Dist::Zilla::Plugin::AllFiles: 0
+  Dist::Zilla::Plugin::AutoPrereq: 0
+  Dist::Zilla::Plugin::AutoVersion: 0
+  Dist::Zilla::Plugin::CheckChangeLog: 0
+  Dist::Zilla::Plugin::CompileTests: 0
+  Dist::Zilla::Plugin::CriticTests: 0
+  Dist::Zilla::Plugin::ExtraTests: 0
+  Dist::Zilla::Plugin::InstallDirs: 0
+  Dist::Zilla::Plugin::License: 0
+  Dist::Zilla::Plugin::Manifest: 0
+  Dist::Zilla::Plugin::ManifestSkip: 0
+  Dist::Zilla::Plugin::MetaProvides::Package: 0
+  Dist::Zilla::Plugin::MetaTests: 0
+  Dist::Zilla::Plugin::MetaYAML: 0
+  Dist::Zilla::Plugin::ModuleBuild: 0
+  Dist::Zilla::Plugin::NextRelease: 0
+  Dist::Zilla::Plugin::PkgVersion: 0
+  Dist::Zilla::Plugin::PodTests: 0
+  Dist::Zilla::Plugin::PodWeaver: 0
+  Dist::Zilla::Plugin::Prepender: 1.100130
+  Dist::Zilla::Plugin::PruneCruft: 0
+  Dist::Zilla::Plugin::Readme: 0
+  Dist::Zilla::Plugin::TaskWeaver: 0
+  Dist::Zilla::Plugin::UploadToCPAN: 0
   Dist::Zilla::PluginBundle::Git: 0
   Dist::Zilla::Role::PluginBundle: 0
   English: 0
   File::Find: 0
-  Module::Build: 0
+  Module::Build: 0.3601
   Moose: 0
   Moose::Autobox: 0
   Test::More: 0
@@ -30,4 +54,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-PluginBundle-JQUELIN
   repository: http://github.com/jquelin/dist-zilla-pluginbundle-jquelin
-version: 1.100081
+version: 1.100130

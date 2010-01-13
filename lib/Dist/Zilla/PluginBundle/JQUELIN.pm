@@ -11,9 +11,33 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
-our $VERSION = '1.100081';
+our $VERSION = '1.100130';
 # ABSTRACT: build & release a distribution like jquelin
 
+use Dist::Zilla::Plugin::AllFiles;
+use Dist::Zilla::Plugin::AutoPrereq;
+use Dist::Zilla::Plugin::AutoVersion;
+use Dist::Zilla::Plugin::CheckChangeLog;
+use Dist::Zilla::Plugin::CompileTests;
+use Dist::Zilla::Plugin::CriticTests;
+use Dist::Zilla::Plugin::ExtraTests;
+use Dist::Zilla::Plugin::InstallDirs;
+use Dist::Zilla::Plugin::License;
+use Dist::Zilla::Plugin::Manifest;
+use Dist::Zilla::Plugin::ManifestSkip;
+use Dist::Zilla::Plugin::MetaProvides::Package;
+use Dist::Zilla::Plugin::MetaYAML;
+use Dist::Zilla::Plugin::MetaTests;
+use Dist::Zilla::Plugin::ModuleBuild;
+use Dist::Zilla::Plugin::NextRelease;
+use Dist::Zilla::Plugin::PkgVersion;
+use Dist::Zilla::Plugin::PodTests;
+use Dist::Zilla::Plugin::PodWeaver;
+use Dist::Zilla::Plugin::Prepender 1.100130;
+use Dist::Zilla::Plugin::PruneCruft;
+use Dist::Zilla::Plugin::Readme;
+use Dist::Zilla::Plugin::TaskWeaver;
+use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
 use Moose;
 use Moose::Autobox;
@@ -69,7 +93,7 @@ sub bundle_config {
         [ NextRelease => {} ],
         [ PkgVersion  => {} ],
         [ ( $arg->{weaver} eq 'task' ? 'TaskWeaver' : 'PodWeaver' ) => {} ],
-        [ Prepender   => { copyright => 1 } ],
+        [ Prepender   => {} ],
 
         # -- dynamic meta-information
         [ InstallDirs             => {} ],
@@ -121,7 +145,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.100081
+version 1.100130
 
 =head1 SYNOPSIS
 
@@ -159,7 +183,6 @@ equivalent to:
     [PkgVersion]
     [PodWeaver]
     [Prepender]
-    copyright = 1
 
     ; -- dynamic meta-information
     [InstallDirs]
@@ -215,7 +238,7 @@ L<http://www.listbox.com/subscribe/?list_id=139292>
 
 =item * Git repository
 
-L<http://github.com/jquelin/dist-zilla-pluginbundle-jquelin.git>
+L<http://github.com/jquelin/dist-zilla-pluginbundle-jquelin>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
@@ -244,3 +267,4 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
+
