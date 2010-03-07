@@ -11,9 +11,14 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
-our $VERSION = '1.100220';
+our $VERSION = '1.100660';
 # ABSTRACT: build & release a distribution like jquelin
 
+use Class::MOP;
+use Moose;
+use Moose::Autobox;
+
+# plugins used
 use Dist::Zilla::Plugin::AllFiles;
 use Dist::Zilla::Plugin::AutoPrereq;
 use Dist::Zilla::Plugin::AutoVersion;
@@ -39,8 +44,6 @@ use Dist::Zilla::Plugin::Readme;
 use Dist::Zilla::Plugin::TaskWeaver;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
-use Moose;
-use Moose::Autobox;
 
 with 'Dist::Zilla::Role::PluginBundle';
 
@@ -118,20 +121,20 @@ sub bundle_config {
     );
 
     # create list of plugins
-    my $prefix = 'Dist::Zilla::Plugin::';
-    my @plugins =
-        map { [ "$class/$prefix$_->[0]" => "$prefix$_->[0]" => $_->[1] ] }
-        @wanted;
+    my @plugins;
+    for my $wanted (@wanted) {
+        my ($name, $arg) = @$wanted;
+        my $class = "Dist::Zilla::Plugin::$name";
+        Class::MOP::load_class($class); # make sure plugin exists
+        push @plugins, [ "$section->{name}/$name" => $class => $arg ];
+    }
 
     # add git plugins
     my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config( {
-        name    => "$class/Git",
+        name    => "$section->{name}/Git",
         payload => { },
     } );
     push @plugins, @gitplugins;
-
-    # make sure all plugins exist
-    eval "require $_->[1]" or die for @plugins; ## no critic ProhibitStringyEval
 
     return @plugins;
 }
@@ -150,15 +153,11 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.100220
-
-=for Pod::Coverage::TrustPod bundle_config
+version 1.100660
 
 =head1 SYNOPSIS
 
-
 In your F<dist.ini>:
-
 
     [@JQUELIN]
     major_version = 1          ; this is the default
@@ -167,10 +166,8 @@ In your F<dist.ini>:
 
 =head1 DESCRIPTION
 
-
 This is a plugin bundle to load all plugins that I am using. It is
 equivalent to:
-
 
     [AutoVersion]
 
@@ -213,77 +210,57 @@ equivalent to:
 
 The following options are accepted:
 
-
 =over 4
-
 
 =item * C<major_version> - passed as C<major> option to the
 L<AutoVersion|Dist::Zilla::Plugin::AutoVersion> plugin. Default to 1.
-
 
 =item * C<weaver> - can be either C<pod> (default) or C<task>, to load
 respectively either L<PodWeaver|Dist::Zilla::Plugin::PodWeaver> or
 L<TaskWeaver|Dist::Zilla::Plugin::TaskWeaver>.
 
-
 =item * C<skip_prereq> - passed as C<skip> option to the
 L<AutoPrereq|Dist::Zilla::Plugin::AutoPrereq> plugin if set. No default.
-
 
 =item * C<fake_home> - passed to
 L<CompileTests|Dist::Zilla::Plugin::CompileTests> to control whether
 to fake home.
 
-
 =back
+
+=for Pod::Coverage::TrustPod bundle_config
 
 =head1 SEE ALSO
 
-
 You can look for information on this module at:
-
 
 =over 4
 
-
 =item * Search CPAN
-
 
 L<http://search.cpan.org/dist/Dist-Zilla-PluginBundle-JQUELIN>
 
-
 =item * See open / report bugs
-
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Dist-Zilla-PluginBundle-JQUELIN>
 
-
 =item * Mailing-list (same as dist-zilla)
-
 
 L<http://www.listbox.com/subscribe/?list_id=139292>
 
-
 =item * Git repository
-
 
 L<http://github.com/jquelin/dist-zilla-pluginbundle-jquelin>
 
-
 =item * AnnoCPAN: Annotated CPAN documentation
-
 
 L<http://annocpan.org/dist/Dist-Zilla-PluginBundle-JQUELIN>
 
-
 =item * CPAN Ratings
-
 
 L<http://cpanratings.perl.org/d/Dist-Zilla-PluginBundle-JQUELIN>
 
-
 =back
-
 
 See also: L<Dist::Zilla::PluginBundle>.
 

@@ -2,11 +2,9 @@
 abstract: 'build & release a distribution like jquelin'
 author:
   - 'Jerome Quelin'
-build_requires:
-  Module::Build: 0.3601
-configure_requires:
-  Module::Build: 0.3601
-generated_by: 'Dist::Zilla version 1.100160'
+build_requires: {}
+configure_requires: {}
+generated_by: 'Dist::Zilla version 1.100651'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,8 +13,9 @@ name: Dist-Zilla-PluginBundle-JQUELIN
 provides:
   Dist::Zilla::PluginBundle::JQUELIN:
     file: lib/Dist/Zilla/PluginBundle/JQUELIN.pm
-    version: 1.100220
+    version: 1.100660
 requires:
+  Class::MOP: 0
   Dist::Zilla::Plugin::AllFiles: 0
   Dist::Zilla::Plugin::AutoPrereq: 0
   Dist::Zilla::Plugin::AutoVersion: 0
@@ -46,7 +45,6 @@ requires:
   English: 0
   File::Find: 0
   File::Temp: 0
-  Module::Build: 0.3601
   Moose: 0
   Moose::Autobox: 0
   Test::More: 0
@@ -55,4 +53,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-PluginBundle-JQUELIN
   repository: http://github.com/jquelin/dist-zilla-pluginbundle-jquelin
-version: 1.100220
+version: 1.100660
