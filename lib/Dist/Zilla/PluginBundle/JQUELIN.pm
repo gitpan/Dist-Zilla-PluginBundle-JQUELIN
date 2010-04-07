@@ -11,7 +11,9 @@ use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
-$Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.100900';
+BEGIN {
+  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.100970';
+}
 # ABSTRACT: build & release a distribution like jquelin
 
 use Class::MOP;
@@ -21,29 +23,40 @@ use Moose::Autobox;
 # plugins used
 use Dist::Zilla::Plugin::AutoPrereq;
 use Dist::Zilla::Plugin::AutoVersion;
+use Dist::Zilla::Plugin::Bugtracker;
 use Dist::Zilla::Plugin::CheckChangeLog;
 use Dist::Zilla::Plugin::CompileTests 1.100220;
 use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::ExecDir;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::GatherDir;
+use Dist::Zilla::Plugin::HasVersionTests;
+use Dist::Zilla::Plugin::Homepage;
+#use Dist::Zilla::Plugin::InstallGuide;
 use Dist::Zilla::Plugin::License;
 use Dist::Zilla::Plugin::Manifest;
 use Dist::Zilla::Plugin::ManifestSkip;
+use Dist::Zilla::Plugin::MetaConfig;
 use Dist::Zilla::Plugin::MetaProvides::Package;
 use Dist::Zilla::Plugin::MetaYAML;
 use Dist::Zilla::Plugin::MetaTests;
 use Dist::Zilla::Plugin::ModuleBuild;
+use Dist::Zilla::Plugin::MinimumVersionTests;
 use Dist::Zilla::Plugin::NextRelease;
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
 use Dist::Zilla::Plugin::PodWeaver;
+use Dist::Zilla::Plugin::PortabilityTests;
 use Dist::Zilla::Plugin::Prepender 1.100130;
 use Dist::Zilla::Plugin::PruneCruft;
 use Dist::Zilla::Plugin::Readme;
+use Dist::Zilla::Plugin::ReportVersions;
+use Dist::Zilla::Plugin::Repository;
 use Dist::Zilla::Plugin::ShareDir;
 use Dist::Zilla::Plugin::TaskWeaver;
+use Dist::Zilla::Plugin::TestRelease;
+use Dist::Zilla::Plugin::UnusedVarsTests;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
 
@@ -51,7 +64,6 @@ with 'Dist::Zilla::Role::PluginBundle';
 
 sub bundle_config {
     my ($self, $section) = @_;
-    my $class = ref($self) || $self;
     my $arg   = $section->{payload};
 
     # params for AutoVersion
@@ -85,12 +97,17 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ GatherDir        => {} ],
-        [ CompileTests     => $compile_params ],
-        [ CriticTests      => {} ],
-        [ MetaTests        => {} ],
-        [ PodCoverageTests => {} ],
-        [ PodSyntaxTests   => {} ],
+        [ GatherDir           => {} ],
+        [ CompileTests        => $compile_params ],
+        [ CriticTests         => {} ],
+        [ HasVersionTests     => {} ],
+        [ MetaTests           => {} ],
+        [ MinimumVersionTests => {} ],
+        [ PodCoverageTests    => {} ],
+        [ PodSyntaxTests      => {} ],
+        [ PortabilityTests    => {} ],
+        [ ReportVersions      => {} ],
+        [ UnusedVarsTests     => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
@@ -109,17 +126,23 @@ sub bundle_config {
         # -- dynamic meta-information
         [ ExecDir                 => {} ],
         [ ShareDir                => {} ],
+        [ Bugtracker              => {} ],
+        [ Homepage                => {} ],
+        [ Repository              => {} ],
         [ 'MetaProvides::Package' => {} ],
+        [ MetaConfig              => {} ],
 
         # -- generate meta files
-        [ License     => {} ],
-        [ ModuleBuild => {} ],
-        [ MetaYAML    => {} ],
-        [ Readme      => {} ],
-        [ Manifest    => {} ], # should come last
+        [ License      => {} ],
+        [ MetaYAML     => {} ],
+        [ ModuleBuild  => {} ],
+        #[ InstallGuide => {} ],
+        [ Readme       => {} ],
+        [ Manifest     => {} ], # should come last
 
         # -- release
         [ CheckChangeLog => {} ],
+        [ TestRelease    => {} ],
         #[ @Git],
         [ UploadToCPAN   => {} ],
     );
@@ -157,7 +180,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.100900
+version 1.100970
 
 =head1 SYNOPSIS
 
