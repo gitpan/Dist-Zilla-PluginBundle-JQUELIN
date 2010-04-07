@@ -43,8 +43,8 @@ my %module_build_args = (
                                        'Dist::Zilla::Plugin::PodWeaver' => '0',
                                        'Dist::Zilla::Role::PluginBundle' => '0',
                                        'Class::MOP' => '0',
-                                       'Dist::Zilla::Plugin::MetaYAML' => '0',
                                        'Dist::Zilla::Plugin::Readme' => '0',
+                                       'Dist::Zilla::Plugin::MetaYAML' => '0',
                                        'Dist::Zilla::Plugin::GatherDir' => '0',
                                        'Dist::Zilla::Plugin::AutoVersion' => '0',
                                        'Dist::Zilla::Plugin::CriticTests' => '0',
@@ -61,6 +61,7 @@ my %module_build_args = (
                                        'Dist::Zilla::Plugin::ExecDir' => '0',
                                        'perl' => '5.008',
                                        'Dist::Zilla::Plugin::UnusedVarsTests' => '0',
+                                       'Dist::Zilla::Plugin::KwaliteeTests' => '0',
                                        'Dist::Zilla::Plugin::Homepage' => '0',
                                        'Dist::Zilla::PluginBundle::Git' => '0',
                                        'Dist::Zilla::Plugin::PruneCruft' => '0',
@@ -70,7 +71,7 @@ my %module_build_args = (
                        'configure_requires' => {
                                                  'Module::Build' => '0.3601'
                                                },
-                       'dist_version' => '1.100970'
+                       'dist_version' => '1.100971'
                      );
 
 

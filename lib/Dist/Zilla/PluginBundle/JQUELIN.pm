@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
 BEGIN {
-  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.100970';
+  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.100971';
 }
 # ABSTRACT: build & release a distribution like jquelin
 
@@ -33,6 +33,7 @@ use Dist::Zilla::Plugin::GatherDir;
 use Dist::Zilla::Plugin::HasVersionTests;
 use Dist::Zilla::Plugin::Homepage;
 #use Dist::Zilla::Plugin::InstallGuide;
+use Dist::Zilla::Plugin::KwaliteeTests;
 use Dist::Zilla::Plugin::License;
 use Dist::Zilla::Plugin::Manifest;
 use Dist::Zilla::Plugin::ManifestSkip;
@@ -101,6 +102,7 @@ sub bundle_config {
         [ CompileTests        => $compile_params ],
         [ CriticTests         => {} ],
         [ HasVersionTests     => {} ],
+        [ KwaliteeTests       => {} ],
         [ MetaTests           => {} ],
         [ MinimumVersionTests => {} ],
         [ PodCoverageTests    => {} ],
@@ -180,7 +182,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.100970
+version 1.100971
 
 =head1 SYNOPSIS
 

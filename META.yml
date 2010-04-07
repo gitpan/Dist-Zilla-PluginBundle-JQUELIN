@@ -21,7 +21,7 @@ name: Dist-Zilla-PluginBundle-JQUELIN
 provides:
   Dist::Zilla::PluginBundle::JQUELIN:
     file: lib/Dist/Zilla/PluginBundle/JQUELIN.pm
-    version: 1.100970
+    version: 1.100971
 recommends: {}
 requires:
   Class::MOP: 0
@@ -36,6 +36,7 @@ requires:
   Dist::Zilla::Plugin::GatherDir: 0
   Dist::Zilla::Plugin::HasVersionTests: 0
   Dist::Zilla::Plugin::Homepage: 0
+  Dist::Zilla::Plugin::KwaliteeTests: 0
   Dist::Zilla::Plugin::License: 0
   Dist::Zilla::Plugin::Manifest: 0
   Dist::Zilla::Plugin::ManifestSkip: 0
@@ -71,7 +72,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-PluginBundle-JQUELIN
   homepage: http://search.cpan.org/dist/Dist-Zilla-PluginBundle-JQUELIN/
   repository: http://github.com/jquelin/dist-zilla-pluginbundle-jquelin
-version: 1.100970
+version: 1.100971
 x_Dist_Zilla:
   plugins:
     -
@@ -98,6 +99,10 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::HasVersionTests
       name: '@JQUELIN/HasVersionTests'
       version: 1.100700
+    -
+      class: Dist::Zilla::Plugin::KwaliteeTests
+      name: '@JQUELIN/KwaliteeTests'
+      version: 1.100690
     -
       class: Dist::Zilla::Plugin::MetaTests
       name: '@JQUELIN/MetaTests'
