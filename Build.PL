@@ -49,7 +49,6 @@ my %module_build_args = (
                                        'Dist::Zilla::Plugin::AutoVersion' => '0',
                                        'Dist::Zilla::Plugin::CriticTests' => '0',
                                        'Moose' => '0',
-                                       'Dist::Zilla::Plugin::TestRelease' => '0',
                                        'Dist::Zilla::Plugin::PodCoverageTests' => '0',
                                        'Dist::Zilla::Plugin::Prepender' => '1.100130',
                                        'Dist::Zilla::Plugin::AutoPrereq' => '0',
@@ -71,7 +70,7 @@ my %module_build_args = (
                        'configure_requires' => {
                                                  'Module::Build' => '0.3601'
                                                },
-                       'dist_version' => '1.100971'
+                       'dist_version' => '1.100972'
                      );
 
 

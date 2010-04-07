@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
 BEGIN {
-  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.100971';
+  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.100972';
 }
 # ABSTRACT: build & release a distribution like jquelin
 
@@ -56,7 +56,6 @@ use Dist::Zilla::Plugin::ReportVersions;
 use Dist::Zilla::Plugin::Repository;
 use Dist::Zilla::Plugin::ShareDir;
 use Dist::Zilla::Plugin::TaskWeaver;
-use Dist::Zilla::Plugin::TestRelease;
 use Dist::Zilla::Plugin::UnusedVarsTests;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
@@ -144,7 +143,6 @@ sub bundle_config {
 
         # -- release
         [ CheckChangeLog => {} ],
-        [ TestRelease    => {} ],
         #[ @Git],
         [ UploadToCPAN   => {} ],
     );
@@ -182,7 +180,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.100971
+version 1.100972
 
 =head1 SYNOPSIS
 
@@ -204,9 +202,15 @@ equivalent to:
     [GatherDir]
     [CompileTests]
     [CriticTests]
+    [HasVersionTests]
+    [KwaliteeTests]
     [MetaTests]
+    [MinimumVersionTests]
     [PodCoverageTests]
     [PodSyntaxTests]
+    [PortabilityTests]
+    [ReportVersions]
+    [UnusedVarsTests]
 
     ; -- remove some files
     [PruneCruft]
@@ -225,7 +229,11 @@ equivalent to:
     ; -- dynamic meta-information
     [ExecDir]
     [ShareDir]
+    [Bugtracker]
+    [Homepage]
+    [Repository]
     [MetaProvides::Package]
+    [MetaConfig]
 
     ; -- generate meta files
     [License]
