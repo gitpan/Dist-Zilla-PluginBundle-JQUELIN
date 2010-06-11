@@ -1,18 +1,18 @@
-# 
+#
 # This file is part of Dist-Zilla-PluginBundle-JQUELIN
-# 
+#
 # This software is copyright (c) 2010 by Jerome Quelin.
-# 
+#
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
-# 
+#
 use 5.008;
 use strict;
 use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
 BEGIN {
-  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.100972';
+  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.101620';
 }
 # ABSTRACT: build & release a distribution like jquelin
 
@@ -38,12 +38,13 @@ use Dist::Zilla::Plugin::License;
 use Dist::Zilla::Plugin::Manifest;
 use Dist::Zilla::Plugin::ManifestSkip;
 use Dist::Zilla::Plugin::MetaConfig;
+use Dist::Zilla::Plugin::MetaJSON;
 use Dist::Zilla::Plugin::MetaProvides::Package;
 use Dist::Zilla::Plugin::MetaYAML;
 use Dist::Zilla::Plugin::MetaTests;
 use Dist::Zilla::Plugin::ModuleBuild;
 use Dist::Zilla::Plugin::MinimumVersionTests;
-use Dist::Zilla::Plugin::NextRelease;
+use Dist::Zilla::Plugin::NextRelease 2.101230;  # time_zone param
 use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
@@ -119,7 +120,7 @@ sub bundle_config {
 
         # -- munge files
         [ ExtraTests  => {} ],
-        [ NextRelease => {} ],
+        [ NextRelease => { time_zone => 'Europe/Paris' } ],
         [ PkgVersion  => {} ],
         [ ( $arg->{weaver} eq 'task' ? 'TaskWeaver' : 'PodWeaver' ) => {} ],
         [ Prepender   => {} ],
@@ -136,6 +137,7 @@ sub bundle_config {
         # -- generate meta files
         [ License      => {} ],
         [ MetaYAML     => {} ],
+        [ MetaJSON     => {} ],
         [ ModuleBuild  => {} ],
         #[ InstallGuide => {} ],
         [ Readme       => {} ],
@@ -180,7 +182,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.100972
+version 1.101620
 
 =head1 SYNOPSIS
 
@@ -239,6 +241,7 @@ equivalent to:
     [License]
     [ModuleBuild]
     [MetaYAML]
+    [MetaJSON]
     [Readme]
     [Manifest] ; should come last
 
