@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
 BEGIN {
-  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.101620';
+  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.110010';
 }
 # ABSTRACT: build & release a distribution like jquelin
 
@@ -21,12 +21,12 @@ use Moose;
 use Moose::Autobox;
 
 # plugins used
-use Dist::Zilla::Plugin::AutoPrereq;
+use Dist::Zilla::Plugin::AutoPrereqs;
 use Dist::Zilla::Plugin::AutoVersion;
 use Dist::Zilla::Plugin::Bugtracker;
 use Dist::Zilla::Plugin::CheckChangeLog;
 use Dist::Zilla::Plugin::CompileTests 1.100220;
-use Dist::Zilla::Plugin::CriticTests;
+#use Dist::Zilla::Plugin::CriticTests;
 use Dist::Zilla::Plugin::ExecDir;
 use Dist::Zilla::Plugin::ExtraTests;
 use Dist::Zilla::Plugin::GatherDir;
@@ -41,7 +41,7 @@ use Dist::Zilla::Plugin::MetaConfig;
 use Dist::Zilla::Plugin::MetaJSON;
 use Dist::Zilla::Plugin::MetaProvides::Package;
 use Dist::Zilla::Plugin::MetaYAML;
-use Dist::Zilla::Plugin::MetaTests;
+#use Dist::Zilla::Plugin::MetaTests;
 use Dist::Zilla::Plugin::ModuleBuild;
 use Dist::Zilla::Plugin::MinimumVersionTests;
 use Dist::Zilla::Plugin::NextRelease 2.101230;  # time_zone param
@@ -52,12 +52,13 @@ use Dist::Zilla::Plugin::PodWeaver;
 use Dist::Zilla::Plugin::PortabilityTests;
 use Dist::Zilla::Plugin::Prepender 1.100130;
 use Dist::Zilla::Plugin::PruneCruft;
+use Dist::Zilla::Plugin::PruneFiles;
 use Dist::Zilla::Plugin::Readme;
-use Dist::Zilla::Plugin::ReportVersions;
+use Dist::Zilla::Plugin::ReportVersions::Tiny;
 use Dist::Zilla::Plugin::Repository;
 use Dist::Zilla::Plugin::ShareDir;
 use Dist::Zilla::Plugin::TaskWeaver;
-use Dist::Zilla::Plugin::UnusedVarsTests;
+#use Dist::Zilla::Plugin::UnusedVarsTests;
 use Dist::Zilla::Plugin::UploadToCPAN;
 use Dist::Zilla::PluginBundle::Git;
 
@@ -98,25 +99,26 @@ sub bundle_config {
         ],
 
         # -- fetch & generate files
-        [ GatherDir           => {} ],
-        [ CompileTests        => $compile_params ],
-        [ CriticTests         => {} ],
-        [ HasVersionTests     => {} ],
-        [ KwaliteeTests       => {} ],
-        [ MetaTests           => {} ],
-        [ MinimumVersionTests => {} ],
-        [ PodCoverageTests    => {} ],
-        [ PodSyntaxTests      => {} ],
-        [ PortabilityTests    => {} ],
-        [ ReportVersions      => {} ],
-        [ UnusedVarsTests     => {} ],
+        [ GatherDir              => {} ],
+        [ CompileTests           => $compile_params ],
+        #[ CriticTests            => {} ],
+        [ HasVersionTests        => {} ],
+        [ KwaliteeTests          => {} ],
+        #[ MetaTests              => {} ],
+        [ MinimumVersionTests    => {} ],
+        [ PodCoverageTests       => {} ],
+        [ PodSyntaxTests         => {} ],
+        [ PortabilityTests       => {} ],
+        [ 'ReportVersions::Tiny' => {} ],
+        #[ UnusedVarsTests        => {} ],
 
         # -- remove some files
         [ PruneCruft   => {} ],
+        [ PruneFiles   => { match => '~$' } ],
         [ ManifestSkip => {} ],
 
         # -- get prereqs
-        [ AutoPrereq => $prereq_params ],
+        [ AutoPrereqs => $prereq_params ],
 
         # -- munge files
         [ ExtraTests  => {} ],
@@ -182,7 +184,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.101620
+version 1.110010
 
 =head1 SYNOPSIS
 
@@ -203,23 +205,22 @@ equivalent to:
     ; -- fetch & generate files
     [GatherDir]
     [CompileTests]
-    [CriticTests]
     [HasVersionTests]
     [KwaliteeTests]
-    [MetaTests]
     [MinimumVersionTests]
     [PodCoverageTests]
     [PodSyntaxTests]
     [PortabilityTests]
-    [ReportVersions]
-    [UnusedVarsTests]
+    [ReportVersions::Tiny]
 
     ; -- remove some files
     [PruneCruft]
+    [PruneFiles]
+    match = ~$
     [ManifestSkip]
 
     ; -- get prereqs
-    [AutoPrereq]
+    [AutoPrereqs]
 
     ; -- munge files
     [ExtraTests]
