@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
 BEGIN {
-  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.110010';
+  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.110700';
 }
 # ABSTRACT: build & release a distribution like jquelin
 
@@ -49,7 +49,7 @@ use Dist::Zilla::Plugin::PkgVersion;
 use Dist::Zilla::Plugin::PodCoverageTests;
 use Dist::Zilla::Plugin::PodSyntaxTests;
 use Dist::Zilla::Plugin::PodWeaver;
-use Dist::Zilla::Plugin::PortabilityTests;
+#use Dist::Zilla::Plugin::PortabilityTests;
 use Dist::Zilla::Plugin::Prepender 1.100130;
 use Dist::Zilla::Plugin::PruneCruft;
 use Dist::Zilla::Plugin::PruneFiles;
@@ -108,7 +108,7 @@ sub bundle_config {
         [ MinimumVersionTests    => {} ],
         [ PodCoverageTests       => {} ],
         [ PodSyntaxTests         => {} ],
-        [ PortabilityTests       => {} ],
+        #[ PortabilityTests       => {} ],
         [ 'ReportVersions::Tiny' => {} ],
         #[ UnusedVarsTests        => {} ],
 
@@ -184,7 +184,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.110010
+version 1.110700
 
 =head1 SYNOPSIS
 
@@ -210,7 +210,6 @@ equivalent to:
     [MinimumVersionTests]
     [PodCoverageTests]
     [PodSyntaxTests]
-    [PortabilityTests]
     [ReportVersions::Tiny]
 
     ; -- remove some files
@@ -309,7 +308,7 @@ See also: L<Dist::Zilla::PluginBundle>.
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

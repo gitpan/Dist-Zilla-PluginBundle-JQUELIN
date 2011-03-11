@@ -74,7 +74,6 @@ eval { $v .= pmver('Dist::Zilla::Plugin::PkgVersion','any version') };
 eval { $v .= pmver('Dist::Zilla::Plugin::PodCoverageTests','any version') };
 eval { $v .= pmver('Dist::Zilla::Plugin::PodSyntaxTests','any version') };
 eval { $v .= pmver('Dist::Zilla::Plugin::PodWeaver','any version') };
-eval { $v .= pmver('Dist::Zilla::Plugin::PortabilityTests','any version') };
 eval { $v .= pmver('Dist::Zilla::Plugin::Prepender','1.100130') };
 eval { $v .= pmver('Dist::Zilla::Plugin::PruneCruft','any version') };
 eval { $v .= pmver('Dist::Zilla::Plugin::PruneFiles','any version') };

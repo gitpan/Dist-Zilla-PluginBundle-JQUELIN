@@ -20,7 +20,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-PluginBundle-JQUELIN',
-  'dist_version' => '1.110010',
+  'dist_version' => '1.110700',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::PluginBundle::JQUELIN',
   'recommends' => {},
@@ -52,7 +52,6 @@ my %module_build_args = (
     'Dist::Zilla::Plugin::PodCoverageTests' => '0',
     'Dist::Zilla::Plugin::PodSyntaxTests' => '0',
     'Dist::Zilla::Plugin::PodWeaver' => '0',
-    'Dist::Zilla::Plugin::PortabilityTests' => '0',
     'Dist::Zilla::Plugin::Prepender' => '1.100130',
     'Dist::Zilla::Plugin::PruneCruft' => '0',
     'Dist::Zilla::Plugin::PruneFiles' => '0',
