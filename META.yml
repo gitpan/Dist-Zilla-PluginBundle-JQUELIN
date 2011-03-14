@@ -19,7 +19,7 @@ name: Dist-Zilla-PluginBundle-JQUELIN
 provides:
   Dist::Zilla::PluginBundle::JQUELIN:
     file: lib/Dist/Zilla/PluginBundle/JQUELIN.pm
-    version: 1.110700
+    version: 1.110730
 requires:
   Class::MOP: 0
   Dist::Zilla::Plugin::AutoPrereqs: 0
@@ -66,7 +66,7 @@ resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-PluginBundle-JQUELIN/
   repository: git://github.com/jquelin/dist-zilla-pluginbundle-jquelin.git
   x_MailingList: http://www.listbox.com/subscribe/?list_id=139292
-version: 1.110700
+version: 1.110730
 x_Dist_Zilla:
   plugins:
     -
@@ -202,25 +202,33 @@ x_Dist_Zilla:
       name: '@JQUELIN/CheckChangeLog'
       version: 0.01
     -
-      class: Dist::Zilla::Plugin::UploadToCPAN
-      name: '@JQUELIN/UploadToCPAN'
-      version: 4.200004
-    -
       class: Dist::Zilla::Plugin::Git::Check
-      name: '@JQUELIN/Git/Check'
+      name: '@JQUELIN/Git::Check'
       version: 1.110500
     -
       class: Dist::Zilla::Plugin::Git::Commit
-      name: '@JQUELIN/Git/Commit'
+      name: '@JQUELIN/Git::Commit'
+      version: 1.110500
+    -
+      class: Dist::Zilla::Plugin::Git::CommitBuild
+      name: '@JQUELIN/Git::CommitBuild'
       version: 1.110500
     -
       class: Dist::Zilla::Plugin::Git::Tag
-      name: '@JQUELIN/Git/Tag'
+      name: '@JQUELIN/TagMaster'
+      version: 1.110500
+    -
+      class: Dist::Zilla::Plugin::Git::Tag
+      name: '@JQUELIN/TagRelease'
       version: 1.110500
     -
       class: Dist::Zilla::Plugin::Git::Push
-      name: '@JQUELIN/Git/Push'
+      name: '@JQUELIN/Git::Push'
       version: 1.110500
+    -
+      class: Dist::Zilla::Plugin::UploadToCPAN
+      name: '@JQUELIN/UploadToCPAN'
+      version: 4.200004
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'

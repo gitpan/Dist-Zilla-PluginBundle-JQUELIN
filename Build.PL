@@ -20,7 +20,7 @@ my %module_build_args = (
     'Jerome Quelin'
   ],
   'dist_name' => 'Dist-Zilla-PluginBundle-JQUELIN',
-  'dist_version' => '1.110700',
+  'dist_version' => '1.110730',
   'license' => 'perl',
   'module_name' => 'Dist::Zilla::PluginBundle::JQUELIN',
   'recommends' => {},

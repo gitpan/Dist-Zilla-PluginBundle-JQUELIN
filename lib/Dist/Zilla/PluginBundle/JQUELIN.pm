@@ -12,7 +12,7 @@ use warnings;
 
 package Dist::Zilla::PluginBundle::JQUELIN;
 BEGIN {
-  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.110700';
+  $Dist::Zilla::PluginBundle::JQUELIN::VERSION = '1.110730';
 }
 # ABSTRACT: build & release a distribution like jquelin
 
@@ -88,6 +88,8 @@ sub bundle_config {
     # params for pod weaver
     $arg->{weaver} ||= 'pod';
 
+    my $release_branch = 'releases';
+
     # long list of plugins
     my @wanted = (
         # -- static meta-information
@@ -147,6 +149,19 @@ sub bundle_config {
 
         # -- release
         [ CheckChangeLog => {} ],
+        [ "Git::Check"   => {} ],
+        [ "Git::Commit"  => {} ],
+        [ "Git::CommitBuild" => {
+                branch         => '',
+                release_branch => $release_branch,
+            } ],
+        [ "Git::Tag"     => "TagMaster"  => {} ],
+        [ "Git::Tag"     => "TagRelease" => {
+                tag_format => 'cpan-v%v',
+                branch     => $release_branch,
+            } ],
+        [ "Git::Push"    => {} ],
+
         #[ @Git],
         [ UploadToCPAN   => {} ],
     );
@@ -154,18 +169,17 @@ sub bundle_config {
     # create list of plugins
     my @plugins;
     for my $wanted (@wanted) {
-        my ($name, $arg) = @$wanted;
-        my $class = "Dist::Zilla::Plugin::$name";
+        my ($plugin, $name, $arg);
+        if ( scalar(@$wanted) == 2 ) {
+            ($plugin, $arg) = @$wanted;
+            $name = $plugin;
+        } else {
+            ($plugin, $name, $arg) = @$wanted;
+        }
+        my $class = "Dist::Zilla::Plugin::$plugin";
         Class::MOP::load_class($class); # make sure plugin exists
         push @plugins, [ "$section->{name}/$name" => $class => $arg ];
     }
-
-    # add git plugins
-    my @gitplugins = Dist::Zilla::PluginBundle::Git->bundle_config( {
-        name    => "$section->{name}/Git",
-        payload => { },
-    } );
-    push @plugins, @gitplugins;
 
     return @plugins;
 }
@@ -184,7 +198,7 @@ Dist::Zilla::PluginBundle::JQUELIN - build & release a distribution like jquelin
 
 =head1 VERSION
 
-version 1.110700
+version 1.110730
 
 =head1 SYNOPSIS
 
@@ -247,7 +261,16 @@ equivalent to:
 
     ; -- release
     [CheckChangeLog]
-    [@Git]
+    [Git::Check],
+    [Git::Commit],
+    [Git::CommitBuild]
+    branch =
+    release_branch = releases
+    [Git::Tag / TagMaster]
+    [Git::Tag / TagRelease]
+    tag_format = cpan-v%v
+    branch     = releases
+    [Git::Push],
     [UploadToCPAN]
 
 The following options are accepted:
